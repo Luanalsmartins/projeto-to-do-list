@@ -8,6 +8,7 @@
     --fundo-decoracao: #58afba;
     --fundo-mais-suave: #d9e9ec;
     --fundo-cinza: #cccccc;
+    --fundo-vermelho: #ff0000;
 }
 
 * {
@@ -106,6 +107,7 @@ li {
     display: flex;
     flex-direction: row;
     align-items: center;
+    transition: .3s ease;
 }
 
 li:hover {
@@ -135,8 +137,8 @@ li button {
 }
 
 li button:hover {
-    background-color: var(--fundo-decoracao);
-    color: var(--fundo);
+    background-color: var(--fundo-vermelho);
+    color: var(--fonte-invertida);
 }
 
 footer {
