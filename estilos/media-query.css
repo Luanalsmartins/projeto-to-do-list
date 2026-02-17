@@ -6,6 +6,7 @@
     }
     .filtros {
         flex-direction: row;
+        gap: 10px;
     }
     .btn {
         padding: 8px 15px;
