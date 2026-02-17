@@ -5,9 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" href="estilos/media-query.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <title>To Do List</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Minhas tarefas</h1>
+    </header>
+    <main>
+        
+        <div class="filtros">
+            <button class="btn">Todas</button>
+            <button class="btn">Pendentes</button>
+            <button class="btn">Concluídas</button>
+        </div>
+        <div class="novatarefa">
+            <input id="novatarefa" placeholder="O que precisa ser feito?">
+        </div>
+        <div class="tarefas">
+            <ul>
+                <li>
+                    <input type="checkbox" class="pointer">
+                    <span class="pointer">Tarefa aqui</span>
+                    <button class="pointer"><span class="material-symbols-outlined">delete</span></button>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>Criado por <a href="https://github.com/luanalsmartins" target="_blank">Luana L S Martins</a></p>
+    </footer>
+
+    <script src="script/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+@media (min-width: 630px) {
+    header {
+    font-size: 2em;
+    }
+    .filtros {
+        flex-direction: row;
+    }
+    .btn {
+        padding: 8px 15px;
+    }
+}
