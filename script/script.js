@@ -2,6 +2,7 @@ let novatarefa = document.getElementById('novatarefa')
 let tasks = []
 let filtroAtual = 'todas'
 let todastarefas = document.querySelector('ul')
+let darkMode = false
 
 function addTask() {
     if (novatarefa.value === '') {
@@ -22,7 +23,6 @@ function addTask() {
     renderTasks()
     saveTasks()
 }
-
 function renderTasks() {
     todastarefas.innerHTML = ''
     
@@ -43,6 +43,7 @@ function renderTasks() {
         span.textContent = tasks[i].text
         span.classList.add('pointer')
 
+        // Editar tarefa com double click
         span.addEventListener('dblclick', function() {
             editarTask(tasks[i].id)
         })
@@ -62,8 +63,11 @@ function renderTasks() {
  
         // Botão deletar
         button.textContent = 'delete'
-        button.classList.add('material-symbols-outlined') 
-        button.classList.add('pointer')
+        button.classList.add(
+            'material-symbols-outlined', 
+            'pointer', 
+            'simbolo'
+        )
         button.addEventListener('click', function() {
             deleteTask(tasks[i].id)
         })
@@ -74,7 +78,6 @@ function renderTasks() {
         todastarefas.appendChild(li)
     }
 }
-
 function toggleTask(id) {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
@@ -85,7 +88,6 @@ function toggleTask(id) {
     renderTasks()
     saveTasks()
 }
-
 function deleteTask(id) {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
@@ -97,20 +99,22 @@ function deleteTask(id) {
     renderTasks()
     saveTasks()
 }
-
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
 }
-
 function loadTasks() {
     let savedTasks = localStorage.getItem('tasks')
+    let savedDarkMode = localStorage.getItem('darkMode')
 
     if (savedTasks) {
         tasks = JSON.parse(savedTasks)
         renderTasks()
     }
+    if (savedDarkMode === 'true') {
+        document.body.classList.add('dark')
+        darkMode = true
+    }
 }
-
 function ativarBotao(botaoClicado) {
     let botoes = document.querySelectorAll('.btn')
 
@@ -120,21 +124,46 @@ function ativarBotao(botaoClicado) {
 
     botaoClicado.classList.add('ativo')
 }
-
 function editarTask(id) {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
-            let novoTexto = prompt('Editar tarefa:', tasks[i].text)
 
-            if (novoTexto !== null && novoTexto.trim() !== '') {
-                tasks[i].text = novoTexto.trim()
-                saveTasks()
-                renderTasks()
-            }
+            let li = todastarefas.children[i]
+            let span = li.querySelector('span')
+
+            let input = document.createElement('input')
+            input.type = 'text'
+            input.value = tasks[i].text
+            input.classList.add('editando')
+
+            li.replaceChild(input, span)
+
+            input.focus()
+
+            // Salvar ao pressionar Enter
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    salvarEdicao(input.value, i)
+                }
+            })
+
+            // Salvar ao perder o foco
+            input.addEventListener('blur', function() {
+                salvarEdicao(input.value, i)
+            })
         
             break
         }
         
+    }
+}
+function salvarEdicao(novoTexto,index) {
+    if (novoTexto.trim() !== '') {
+        tasks[index].text = novoTexto.trim()
+        saveTasks()
+        renderTasks()
+    } else {
+        renderTasks()
     }
 }
 
@@ -158,6 +187,12 @@ document.querySelector('.concluidas').addEventListener('click', function() {
     filtroAtual = 'concluidas'
     ativarBotao(this)
     renderTasks()
+})
+document.getElementById('darkModeToggle').addEventListener('click', function() {
+    darkMode = !darkMode
+    document.body.classList.toggle('dark')
+
+    localStorage.setItem('darkMode', darkMode)
 })
 
 loadTasks()

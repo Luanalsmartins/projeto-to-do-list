@@ -12,14 +12,15 @@
 
 :root {
     --fonte-padrão: Arial, Helvetica, sans-serif;
-    --fundo: #f4f4f4;
     --fonte-principal: #000000;
     --fonte-invertida: #ffffff;
-    --fonte-secundária: #3b8791;
-    --fundo-decoracao: #58afba;
+    --fonte-secundária: #4aa9b5;
+    --fundo: #f4f4f4;
     --fundo-mais-suave: #d9e9ec;
     --fundo-cinza: #cccccc;
     --fundo-vermelho: #ff0000;
+    --fundo-tarefa: #505050;
+    --fundo-dark: #737373;
 }
 
 * {
@@ -45,8 +46,21 @@ header {
     font-size: 1.5em;
     height: 100px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#darkModeToggle {
+    margin: 20px 10px 0px 10px;
+    padding: 5px;
+    align-self: flex-end;
+}
+
+#darkModeToggle:hover {
+    background-color: var(--fundo-tarefa);
+    color: white;
+    transform: scale(1.1);
 }
 
 main {
@@ -68,7 +82,7 @@ main {
 }
 
 .btn {
-    background-color: var(--fundo-decoracao);
+    background-color: var(--fonte-secundária);
     color: var(--fonte-invertida);
     font-size: 1.2em;
     font-weight: bold;
@@ -85,6 +99,7 @@ main {
 .btn:hover {
     background-color: var(--fundo-mais-suave);
     color: var(--fonte-secundária);
+    transform: scale(1.1);
 }
 
 .btn.ativo {
@@ -111,7 +126,7 @@ main {
 
 #novatarefa:focus {
     outline: none;
-    border: 1px solid var(--fundo-decoracao);
+    border: 1px solid var(--fonte-secundária);
     box-shadow: 0 0 8px rgba(88, 175, 186, 0.4);
 }
 
@@ -149,11 +164,24 @@ li:hover {
 }
 
 span.pointer {
-    color: rgb(80, 80, 80);
+    color: var(--fundo-tarefa);
     font-size: 1.2em;
     margin-left: 5px;
     padding: 5px;
     flex: 1;
+}
+
+.editando {
+    flex: 1;
+    font-size: 1.2em;
+    padding: 5px;
+    margin-left: 5px;
+
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+    color: inherit;
 }
 
 input[type="checkbox"] {
@@ -161,7 +189,7 @@ input[type="checkbox"] {
     height: 20px;
 }
 
-li button {
+button.simbolo {
     background: transparent;
     border: none;
     border-radius: 5px;
@@ -195,4 +223,57 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+body.dark {
+    background-color: var(--fundo-tarefa);
+}
+
+body.dark main {
+    background-color: var(--fundo-dark);
+    color: var(--fonte-invertida);
+}
+
+body.dark li {
+    background-color: var(--fundo-tarefa);
+}
+
+body.dark li:hover {
+    background-color: var(--fundo-cinza);
+}
+
+body.dark span {
+    color: var(--fonte-invertida);
+}
+
+body.dark span:hover {
+    color: var(--fonte-principal);
+}
+
+body.dark .btn {
+    background-color: var(--fonte-secundária);
+    color: var(--fonte-invertida);
+}
+
+body.dark .simbolo {
+    color: var(--fundo);
+}
+
+body.dark .btn.ativo {
+    background-color: var(--fundo-mais-suave);
+    color: var(--fonte-secundária);
+}
+
+body.dark .btn:hover {
+    background-color: var(--fundo-mais-suave);
+    color: var(--fonte-secundária);
+}
+
+body.dark #darkModeToggle:hover {
+    background-color: var(--fundo-cinza);
+    color: var(--fundo-tarefa);
+}
+
+body.dark footer {
+    color: var(--fonte-invertida);
 }
