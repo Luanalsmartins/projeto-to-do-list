@@ -88,7 +88,8 @@ main {
 }
 
 .btn.ativo {
-    background-color: var(--fonte-secundária);;
+    background-color: var(--fundo-mais-suave);
+    color: var(--fonte-secundária);
 }
 
 .novatarefa {
